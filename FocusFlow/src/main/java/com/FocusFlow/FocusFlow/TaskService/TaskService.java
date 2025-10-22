@@ -20,4 +20,15 @@ public class TaskService {
     public void createTask(Task task) {
         repo.save(task);
     }
+    public Task getTaskById(Integer id){
+        return repo.findById(id).orElse(null);
+    }
+
+    public Task updateTaskById(Integer id, Task task){
+        Task taskUpdate = repo.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+        taskUpdate.setTitle(task.getTitle());
+        taskUpdate.setDate(task.getDate());
+        taskUpdate.setCompleted(task.isCompleted());
+        return repo.save(taskUpdate);
+    }
 }

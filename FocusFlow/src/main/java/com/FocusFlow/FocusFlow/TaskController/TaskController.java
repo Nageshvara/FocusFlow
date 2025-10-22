@@ -25,10 +25,20 @@ public class TaskController {
         return new ResponseEntity<>(service.getAllTask(), HttpStatus.OK);
     }
 
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Integer id){
+        return new ResponseEntity<>(service.getTaskById(id), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<?> createTask(@RequestBody Task task) {
         service.createTask(task);
         return ResponseEntity.status(HttpStatus.CREATED).body("Task successfully created");
+    }
+
+    @PutMapping("/task/{id}")
+    public ResponseEntity<Task> updateTask(@PathVariable Integer id,@RequestBody Task task){
+        return new ResponseEntity<>(service.updateTaskById(id,task),HttpStatus.CREATED);
     }
 
 }
